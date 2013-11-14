@@ -1,0 +1,8 @@
+*.db
+*.json
+token.dat
+.project
+.pydevproject
+.metadata
+.viminfo
+*.swp
