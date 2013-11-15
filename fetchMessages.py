@@ -44,9 +44,11 @@ if __name__ == '__main__':
 
     parser.add_option("-s", "--start", dest="start", help="File with url to follow")
 
-    parser.add_option("-a", "--access_token", dest="accessToken", help="Token to append to url for accessing the data")
+    parser.add_option("-a", "--access_token", dest="accessToken", default="token.dat", help="Token to append to url for accessing the data")
 
     parser.add_option("-m", "--messages", dest="messages", help="Filename to output the messages to. Also used with restart to read in")
+
+    parser.add_option("-c", "--conversation", dest="conversation", default="159341617595013", help="The id of the conversation to analyze")
 
     (options, args) = parser.parse_args()
     
@@ -55,12 +57,8 @@ if __name__ == '__main__':
 
     # get the access token if it exists
     accessToken = None
-    if options.accessToken:
-        with open(options.accessToken, 'r') as token:
-            accessToken = token.read()
-    else:
-        with open('token.dat', 'r') as token:
-            accessToken = token.read()
+    with open(options.accessToken, 'r') as token:
+        accessToken = token.read()
 
     # run the program
     if options.restart:
@@ -78,6 +76,6 @@ if __name__ == '__main__':
         with open(messagesFilename, 'w') as messagesFile:
             messagesFile.write(json.dumps(messages))
     else:
-        data = getFacebookMessages('https://graph.facebook.com/159341617595013/comments', accessToken)
+        data = getFacebookMessages('https://graph.facebook.com/' + options.conversation + '/comments', accessToken)
         with open(messagesFilename, 'w') as output:
             output.write(json.dumps(data))

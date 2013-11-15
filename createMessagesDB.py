@@ -48,8 +48,8 @@ def addMessageToDB(message, db):
 
 if __name__ == '__main__':
     parser = OptionParser()
-    parser.add_option("-d", "--database", dest="database", help="Filename for the sqlite3 database")
-    parser.add_option("-m", "--messages", dest="messages", help="Filename for the messages in json")
+    parser.add_option("-d", "--database", dest="database", default="messages.db", help="Filename for the sqlite3 database")
+    parser.add_option("-m", "--messages", dest="messages", default="messages.json", help="Filename for the messages in json")
 
     (options, args) = parser.parse_args()
 

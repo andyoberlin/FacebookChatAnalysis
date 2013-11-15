@@ -1,13 +1,7 @@
-import json
-import sqlite3
 from optparse import OptionParser
 
-def averageMessageLen(db):
-    query = 'SELECT F.name, AVG(LENGTH(M.message)) FROM message M JOIN friend F ON M.sender = F.id WHERE M.message != "NULL" GROUP BY M.sender;'
-    
-
-def printOutput(key, value, form):
-    print str(key) + "\t" + str(value)
+from analysis.WordAnalysis import WordAnalysis
+from analysis.ContentAnalysis import ContentAnalysis
 
 if __name__ == '__main__':
     parser = OptionParser()
@@ -17,7 +11,12 @@ if __name__ == '__main__':
     #parser.add_option("-f", "--format", dest="format", default="tabbed",
     #                  help="The format in which to output the data to the console: csv, tabbed")
     
-    (options, args) = parser.parse_args()
+    (opts, args) = parser.parse_args()
+    
+    #perform word analysis
+    WordAnalysis(opts.database).analyze()
+    ContentAnalysis(opts.database).analyze()
+    
     
     
 
