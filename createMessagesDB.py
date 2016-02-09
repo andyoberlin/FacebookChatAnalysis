@@ -23,7 +23,10 @@ def loadMessages(messages):
     return json.loads(result)
 
 def addMessageToDB(message, db):
-    name = message['from']['name']
+    print message
+    
+    
+    name = message['from']['name'] if message.has_key('from') else 'UNKNOWN'
     text = message['message'] if message.has_key('message') else 'NULL'
     time = message['created_time'] 
     

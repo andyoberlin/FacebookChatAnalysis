@@ -6,3 +6,4 @@ token.dat
 .metadata
 .viminfo
 *.swp
+*.pyc
